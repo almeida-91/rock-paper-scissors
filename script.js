@@ -1,7 +1,7 @@
 function computerPlay(){
-    let play = Math.random()*100+1;
-    if (play < 33) return `Rock`;
-    else if (play>=33 && play <66) return `Paper`;
+    let play = Math.random()*3;
+    if (play < 1) return `Rock`;
+    else if (play < 2) return `Paper`;
     else return `Scissors`;
 }
 
@@ -9,32 +9,34 @@ function playRound(){
     let playerSelection = prompt(`Rock/Paper/Scissors`).toLowerCase();
     playerSelection = ((playerSelection.slice(0,1)).toUpperCase()).concat(playerSelection.slice(1));
     let computerSelection = computerPlay();
-
     if (playerSelection == computerSelection){
         console.log(`Player Selected: ${playerSelection}`);
         console.log(`Computer Selected: ${computerSelection}`);
-        return `Draw!!`;
+        return 2;
     } else {
         console.log(`Player Selected: ${playerSelection}`);     
         console.log(`Computer Selected: ${computerSelection}`); 
+        //0 = player wins;
+        //1 = player loses;
+        //2 = draw;
         if (playerSelection == `Rock`){
-                if (computerSelection == `Paper`){
-                return `You Lose! ${computerSelection} beats ${playerSelection}`;
+            if (computerSelection == `Paper`){
+                return 1;
             } else {
-                return `You Win! ${playerSelection} beats ${computerSelection}`;
+                return 0;
             }
         } else if (playerSelection == `Paper`){
             if (computerSelection == `Scissors`){
-                return `You Lose! ${computerSelection} beats ${playerSelection}`;
+                return 1;
             } else if(computerSelection == `Rock`){
-                return `You Win! ${playerSelection} beats ${computerSelection}`;
+                return 0;
             }
         } else if (playerSelection == `Scissors`){
             if(computerSelection == `Rock`){
-                return `You Lose! ${computerSelection} beats ${playerSelection}`;
+                return 1;
             }
             else if (computerSelection == `Paper`){
-                return `You Win! ${playerSelection} beats ${computerSelection}`;
+                return 0;
             }
         }
     }
@@ -43,15 +45,15 @@ function playRound(){
 function game(){
     let computerScore = 0;
     let playerScore = 0;
-    let result = ""
+    let result;
     for( let i = 0 ; i < 5 ; i++ ){
-        result = playRound().slice(0,7);
-        if ( result == `You Win`){
-            playerScore += 1;
+        result = playRound();
+        if ( result == 0){
+            playerScore ++;
             console.log(`Player Score : ${playerScore}`);
             console.log(`Computer Score : ${computerScore}`);
-        } else if ( result == `You Los`){
-            computerScore += 1;
+        } else if ( result == 1){
+            computerScore ++;
             console.log(`Player Score : ${playerScore}`);
             console.log(`Computer Score : ${computerScore}`);
         } else {
