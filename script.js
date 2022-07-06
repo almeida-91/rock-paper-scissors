@@ -163,6 +163,8 @@ result.appendChild(cpuRecord);
 
 //result.child
 //buttonR.addEventListener(`click`,playRound());
+
+//Create record log
 const winner = document.createElement(`p`);
 winner.classList.add(`winner`);
 winner.textContent = ``;
