@@ -4,6 +4,7 @@ function computerPlay(){
     else if (play < 2) return `Paper`;
     else return `Scissors`;
 }
+
 let totalPlayerWins = 0;
 let totalCPUWins = 0;
 function playRound(playerSelection){
@@ -11,6 +12,10 @@ function playRound(playerSelection){
     playerSelection = playerSelection.toLowerCase();
     playerSelection = ((playerSelection.slice(0,1)).toUpperCase()).concat(playerSelection.slice(1));
     let computerSelection = computerPlay();
+    selectionC.textContent = `Computer Selected: ${computerSelection}`;
+    selectionP.textContent = `Player Selected: ${playerSelection}`;
+    console.log(totalPlayerWins);
+    console.log(totalCPUWins);
     if (winner.textContent != ''){
         winner.textContent = '';
     }
@@ -19,12 +24,12 @@ function playRound(playerSelection){
         totalPlayerWins = 0;
     }
     if (playerSelection == computerSelection){
-        console.log(`Player Selected: ${playerSelection}`);
-        console.log(`Computer Selected: ${computerSelection}`);
+/*         console.log(`Player Selected: ${playerSelection}`);
+        console.log(`Computer Selected: ${computerSelection}`); */
         return 2;
     } else {
-        console.log(`Player Selected: ${playerSelection}`);     
-        console.log(`Computer Selected: ${computerSelection}`); 
+/*         console.log(`Player Selected: ${playerSelection}`);     
+        console.log(`Computer Selected: ${computerSelection}`);  */
         //0 = player wins;
         //1 = player loses;
         //2 = draw;
@@ -93,8 +98,6 @@ const buttonS = document.getElementById(`scissors`);
 
 buttonR.addEventListener(`click`, () =>{
     playRound(buttonR.id);
-    console.log(totalPlayerWins);
-    console.log(totalCPUWins);
     playerRecord.textContent = "Player Score: " +totalPlayerWins;
     cpuRecord.textContent = "Computer Score: " +totalCPUWins;
     if(totalPlayerWins == 5){
@@ -110,8 +113,6 @@ buttonR.addEventListener(`click`, () =>{
 
 buttonP.addEventListener(`click`, () =>{
     playRound(buttonP.id);
-    console.log(totalPlayerWins);
-    console.log(totalCPUWins);
     playerRecord.textContent = "Player Score: " +totalPlayerWins;
     cpuRecord.textContent = "Computer Score: " +totalCPUWins;
     if(totalPlayerWins == 5){
@@ -127,18 +128,16 @@ buttonP.addEventListener(`click`, () =>{
 
  buttonS.addEventListener(`click`, () =>{
     playRound(buttonS.id);
-    console.log(totalPlayerWins);
-    console.log(totalCPUWins);
     playerRecord.textContent = "Player Score: " +totalPlayerWins;
     cpuRecord.textContent = "Computer Score: " +totalCPUWins;
     if(totalPlayerWins == 5){
-        winner.textContent += `Player Wins!`;
+        winner.textContent = `Player Wins!`;
         result.appendChild(winner);
         console.log(winner.textContent);
         totalCPUWins = 0;
         totalPlayerWins = 0;
     } else if(totalCPUWins == 5){
-        winner.textContent += `CPU Wins!`;
+        winner.textContent = `CPU Wins!`;
         result.appendChild(winner);
         console.log(winner.textContent);
         totalCPUWins = 0;
@@ -167,4 +166,14 @@ result.appendChild(cpuRecord);
 const winner = document.createElement(`p`);
 winner.classList.add(`winner`);
 winner.textContent = ``;
+
+const selectionP = document.createElement(`p`);
+selectionP.classList.add(`selectionP`);
+result.appendChild(selectionP);
+selectionP.textContent = `Player Selected: `;
+
+const selectionC = document.createElement(`p`);
+selectionC.classList.add(`selectionC`);
+result.appendChild(selectionC);
+selectionC.textContent = `Computer Selected: `;
 
