@@ -24,6 +24,7 @@ function playRound(playerSelection){
         totalPlayerWins = 0;
     }
     if (playerSelection == computerSelection){
+        winner.textContent = `It's a draw!!`;
 /*         console.log(`Player Selected: ${playerSelection}`);
         console.log(`Computer Selected: ${computerSelection}`); */
         return 2;
@@ -36,26 +37,32 @@ function playRound(playerSelection){
         if (playerSelection == `Rock`){
             if (computerSelection == `Paper`){
                 totalCPUWins++;
+                winner.textContent = `CPU won this round with ${computerSelection} vs ${playerSelection}!`;
                 return 1;
             } else {
                 totalPlayerWins++;
+                winner.textContent = `Player Won this round with ${playerSelection} vs ${computerSelection}!`;
                 return 0;
             }
         } else if (playerSelection == `Paper`){
             if (computerSelection == `Scissors`){
                 totalCPUWins++;
+                winner.textContent = `CPU won this round with ${computerSelection} vs ${playerSelection}!`;
                 return 1;
             } else if(computerSelection == `Rock`){
                 totalPlayerWins++;
+                winner.textContent = `Player Won this round with ${playerSelection} vs ${computerSelection}!`;
                 return 0;
             }
         } else if (playerSelection == `Scissors`){
             if(computerSelection == `Rock`){
                 totalCPUWins++;
+                winner.textContent = `CPU won this round with ${computerSelection} vs ${playerSelection}!`;
                 return 1;
             }
             else if (computerSelection == `Paper`){
                 totalPlayerWins++;
+                winner.textContent = `Player Won this round with ${playerSelection} vs ${computerSelection}!`;
                 return 0;
             }
         }
@@ -138,7 +145,6 @@ buttonP.addEventListener(`click`, () =>{
         totalPlayerWins = 0;
     } else if(totalCPUWins == 5){
         winner.textContent = `CPU Wins!`;
-        result.appendChild(winner);
         console.log(winner.textContent);
         totalCPUWins = 0;
         totalPlayerWins = 0;
@@ -167,7 +173,9 @@ result.appendChild(cpuRecord);
 //Create record log
 const winner = document.createElement(`p`);
 winner.classList.add(`winner`);
-winner.textContent = ``;
+winner.textContent = `Choose Your Weapon!!`;
+result.appendChild(winner);
+
 
 const selectionP = document.createElement(`p`);
 selectionP.classList.add(`selectionP`);
