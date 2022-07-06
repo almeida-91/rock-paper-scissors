@@ -4,11 +4,20 @@ function computerPlay(){
     else if (play < 2) return `Paper`;
     else return `Scissors`;
 }
-
-function playRound(){
-    let playerSelection = prompt(`Rock/Paper/Scissors`).toLowerCase();
+let totalPlayerWins = 0;
+let totalCPUWins = 0;
+function playRound(playerSelection){
+    //playerSelection = prompt(`Rock/Paper/Scissors?`).toLowerCase();
+    playerSelection = playerSelection.toLowerCase();
     playerSelection = ((playerSelection.slice(0,1)).toUpperCase()).concat(playerSelection.slice(1));
     let computerSelection = computerPlay();
+    if (winner.textContent != ''){
+        winner.textContent = '';
+    }
+    if (totalCPUWins == 5 || totalPlayerWins == 5){
+        totalCPUWins = 0;
+        totalPlayerWins = 0;
+    }
     if (playerSelection == computerSelection){
         console.log(`Player Selected: ${playerSelection}`);
         console.log(`Computer Selected: ${computerSelection}`);
@@ -21,21 +30,27 @@ function playRound(){
         //2 = draw;
         if (playerSelection == `Rock`){
             if (computerSelection == `Paper`){
+                totalCPUWins++;
                 return 1;
             } else {
+                totalPlayerWins++;
                 return 0;
             }
         } else if (playerSelection == `Paper`){
             if (computerSelection == `Scissors`){
+                totalCPUWins++;
                 return 1;
             } else if(computerSelection == `Rock`){
+                totalPlayerWins++;
                 return 0;
             }
         } else if (playerSelection == `Scissors`){
             if(computerSelection == `Rock`){
+                totalCPUWins++;
                 return 1;
             }
             else if (computerSelection == `Paper`){
+                totalPlayerWins++;
                 return 0;
             }
         }
@@ -69,4 +84,87 @@ function game(){
         return "Draw!!"
     }
 }
+
+
+
+const buttonR = document.getElementById(`rock`);
+const buttonP = document.getElementById(`paper`);
+const buttonS = document.getElementById(`scissors`);
+
+buttonR.addEventListener(`click`, () =>{
+    playRound(buttonR.id);
+    console.log(totalPlayerWins);
+    console.log(totalCPUWins);
+    playerRecord.textContent = "Player Score: " +totalPlayerWins;
+    cpuRecord.textContent = "Computer Score: " +totalCPUWins;
+    if(totalPlayerWins == 5){
+        winner.textContent += `Player Wins!`;
+        result.appendChild(winner);
+        console.log(winner.textContent);
+    } else if(totalCPUWins == 5){
+        winner.textContent += `CPU Wins!`;
+        result.appendChild(winner);
+        console.log(winner.textContent);
+    }
+});
+
+buttonP.addEventListener(`click`, () =>{
+    playRound(buttonP.id);
+    console.log(totalPlayerWins);
+    console.log(totalCPUWins);
+    playerRecord.textContent = "Player Score: " +totalPlayerWins;
+    cpuRecord.textContent = "Computer Score: " +totalCPUWins;
+    if(totalPlayerWins == 5){
+        winner.textContent += `Player Wins!`;
+        result.appendChild(winner);
+        console.log(winner.textContent);
+    } else if(totalCPUWins == 5){
+        winner.textContent += `CPU Wins!`;
+        result.appendChild(winner);
+        console.log(winner.textContent);
+    }
+});
+
+ buttonS.addEventListener(`click`, () =>{
+    playRound(buttonS.id);
+    console.log(totalPlayerWins);
+    console.log(totalCPUWins);
+    playerRecord.textContent = "Player Score: " +totalPlayerWins;
+    cpuRecord.textContent = "Computer Score: " +totalCPUWins;
+    if(totalPlayerWins == 5){
+        winner.textContent += `Player Wins!`;
+        result.appendChild(winner);
+        console.log(winner.textContent);
+        totalCPUWins = 0;
+        totalPlayerWins = 0;
+    } else if(totalCPUWins == 5){
+        winner.textContent += `CPU Wins!`;
+        result.appendChild(winner);
+        console.log(winner.textContent);
+        totalCPUWins = 0;
+        totalPlayerWins = 0;
+    }
+});
+
+
+const result = document.querySelector(`#result`);
+result.textContent = `Result :`;
+
+const playerRecord = document.createElement(`div`);
+playerRecord.classList.add('playerRecord');
+playerRecord.textContent = "Player Score: " +totalPlayerWins;
+result.appendChild(playerRecord);
+
+const cpuRecord = document.createElement(`div`);
+cpuRecord.classList.add(`cpuRecord`);
+cpuRecord.textContent = "Computer Score: " +totalCPUWins;
+result.appendChild(cpuRecord);
+
+//buttons.addEventListener(`click`, () => playRound(buttons.item.textContent));
+
+//result.child
+//buttonR.addEventListener(`click`,playRound());
+const winner = document.createElement(`p`);
+winner.classList.add(`winner`);
+winner.textContent = ``;
 
